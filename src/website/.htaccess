@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteRule ^github_auth_callback$ /github_auth_callback.php [L]
+RewriteRule ^logout$ /logout.php [L]

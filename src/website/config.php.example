@@ -1,0 +1,5 @@
+<?php
+	define("GITHUB_USER_NAME", "mygithubusername");
+	define("GITHUB_CLIENT_ID", "00112233445566778899");
+	define("GITHUB_CLIENT_SECRET", "aabbccddeeff00112233445566778899aabbccdd");
+?>
