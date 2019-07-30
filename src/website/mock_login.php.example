@@ -1,0 +1,15 @@
+<?php
+	// This is a script to do a login without using GitHub.
+	// Useful in dev environments where using a callback is not
+	// an option or you just want to skip GitHub.
+	
+	require_once("config.php");
+	
+	session_start();
+	
+	$_SESSION["user_full_name"] = "Your Name Here";
+	$_SESSION["user_name"] = "username";
+	$_SESSION["user_id"] = "1234";
+	
+	header("Location: /");
+?>
