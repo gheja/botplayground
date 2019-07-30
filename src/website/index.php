@@ -33,6 +33,115 @@
 	$bots = $statement->fetchAll(PDO::FETCH_ASSOC);
 	
 	
+	if (array_key_exists("action", $_GET))
+	{
+		switch ($_GET["action"])
+		{
+			case "new_bot":
+				// if user has too many bots, don't allow new ones
+				if (count($bots) >= BOT_COUNT_LIMIT_PER_USER)
+				{
+					echo "Too many bots registered. Delete one before creating a new.";
+					die();
+				}
+				
+				// validate "game_id" parameter
+				if (!array_key_exists("game_id", $_GET))
+				{
+					echo "Invalid game_id.";
+					die();
+				}
+				
+				$game_id = $_GET["game_id"];
+				
+				$found = false;
+				
+				foreach ($games as $game)
+				{
+					if ($game["game_id"] == $game_id)
+					{
+						$found = true;
+						break;
+					}
+				}
+				
+				if (!$found)
+				{
+					echo "Invalid game_id.";
+					die();
+				}
+				
+				// generate some random ids for the bot parameters
+				$bot_client_id = bin2hex(random_bytes(16));
+				$bot_secret = bin2hex(random_bytes(16));
+				
+				// insert it into the database
+				$statement = $db->prepare("INSERT INTO bot (github_user_id, bot_client_id, bot_secret, game_id) values (?, ?, ?, ?)");
+				$statement->bindValue(1, $_SESSION["user_id"]);
+				$statement->bindValue(2, $bot_client_id);
+				$statement->bindValue(3, $bot_secret);
+				$statement->bindValue(4, $game_id);
+				$statement->execute();
+				
+				// TODO: check for failed insert
+				
+				// go back to index
+				// TODO: give some feedback
+				header("Location: /");
+				die();
+			break;
+			
+			case "delete_bot":
+				// validate "bot_client_id" parameter
+				if (!array_key_exists("bot_client_id", $_GET))
+				{
+					echo "Invalid bot_client_id.";
+					die();
+				}
+				
+				$bot_client_id = $_GET["bot_client_id"];
+				
+				$found = false;
+				$bot_id = null;
+				
+				// check if this bot really exists and owned by the user
+				foreach ($bots as $bot)
+				{
+					if ($bot["bot_client_id"] == $bot_client_id)
+					{
+						$found = true;
+						$bot_id = $bot["bot_id"];
+						break;
+					}
+				}
+				
+				if (!$found)
+				{
+					echo "Invalid bot_client_id.";
+					die();
+				}
+				
+				// don't delete really just mark it as deleted
+				// $statement = $db->prepare("DELETE FROM bot WHERE bot_id = ?");
+				$statement = $db->prepare("UPDATE bot SET is_deleted = 1 WHERE bot_id = ?");
+				$statement->bindValue(1, $bot_id);
+				$statement->execute();
+				
+				// TODO: check for failed update
+				
+				// go back to index
+				// TODO: give some feedback
+				header("Location: /");
+				die();
+			break;
+			
+			default:
+				echo "Invalid action.";
+				die();
+			break;
+		}
+	}
+	
 	echo "Hello " . $_SESSION["user_full_name"] . "!<br/>";
 	echo "<br/>";
 	echo "You have <b>" . count($bots) . " bots</b> registered in total out of " . BOT_COUNT_LIMIT_PER_USER . ".<br/>";
