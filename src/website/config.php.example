@@ -2,4 +2,11 @@
 	define("GITHUB_USER_NAME", "mygithubusername");
 	define("GITHUB_CLIENT_ID", "00112233445566778899");
 	define("GITHUB_CLIENT_SECRET", "aabbccddeeff00112233445566778899aabbccdd");
+	
+	define("DB_HOSTNAME", "localhost");
+	define("DB_DATABASE", "bpg");
+	define("DB_USERNAME", "bpg_web");
+	define("DB_PASSWORD", "aabbccddeeffgghhiijjkkllmmnnoopp");
+	
+	define("BOT_COUNT_LIMIT_PER_USER", 50);
 ?>
