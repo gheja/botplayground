@@ -186,5 +186,6 @@
 		echo "</ul>";
 	}
 	
+	include("template.howto.php");
 	include("template.footer.php");
 ?>
