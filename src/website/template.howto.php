@@ -31,3 +31,20 @@
 	it will lose. If the match has only one player remaining, that becomes
 	the winner.
 </p>
+<p>
+	Currently no matches are ranked but if enough users and bots join the
+	site it will definitely be considered as it would be the most
+	interesting part.
+</p>
+
+<h3>Personal data usage</h3>
+<p>
+	The site uses GitHub to authenticate the user - as an attempt to prevent
+	fraudulent or spammy behaviour -, it stores only the GitHub user ID to
+	associate the bots with the users. It also stores while logged in the
+	users full name and user name received from GitHub - these are not
+	stored on the system.
+</p>
+<p>
+	The site does not use any third party analytics tool.
+</p>
