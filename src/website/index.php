@@ -8,6 +8,7 @@
 		include("template.header.php");
 		echo "Welcome, please ";
 		echo "<a href=\"https://github.com/login/oauth/authorize?scope=user:read&client_id=" . GITHUB_CLIENT_ID . "\">log in with GitHub</a>.";
+		include("template.howto.php");
 		include("template.footer.php");
 		die();
 	}
