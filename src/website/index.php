@@ -5,8 +5,10 @@
 	
 	if (!array_key_exists("user_name", $_SESSION))
 	{
+		include("template.header.php");
 		echo "Welcome, please ";
 		echo "<a href=\"https://github.com/login/oauth/authorize?scope=user:read&client_id=" . GITHUB_CLIENT_ID . "\">log in with GitHub</a>.";
+		include("template.footer.php");
 		die();
 	}
 	
@@ -142,6 +144,7 @@
 		}
 	}
 	
+	include("template.header.php");
 	echo "Hello " . $_SESSION["user_full_name"] . "!<br/>";
 	echo "<br/>";
 	echo "You have <b>" . count($bots) . " bots</b> registered in total out of " . BOT_COUNT_LIMIT_PER_USER . ".<br/>";
@@ -182,4 +185,6 @@
 		echo "<li><a href=\"?action=new_bot&game_id=" . $game["game_id"] . "\">Add new</a></li>";
 		echo "</ul>";
 	}
+	
+	include("template.footer.php");
 ?>
