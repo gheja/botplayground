@@ -159,12 +159,12 @@
 	{
 		echo "<h3>" . $game["game_title"] . "</h3>";
 		echo "<p>" . $game["game_description"] . "</p>";
-		echo "<h4>Base APIs:</h4>";
+		echo "<h4>Start endpoints:</h4>";
 		echo "<ul>";
-		echo "<li>Start a game: /api/common/v1/game/" . $game["game_name"] . "/start</li>";
+		echo "<li>Start a game: /api/" . $game["game_name"] . "/v1/start</li>";
 		if ($game["game_players"] > 1)
 		{
-			echo "<li>Get a random running game: /api/common/v1/game/" . $game["game_name"] . "/join</li>";
+			echo "<li>Get a random running game: /api/" . $game["game_name"] . "/v1/join</li>";
 		}
 		echo "</ul>";
 		echo "<h4>Your bots</h4>";
